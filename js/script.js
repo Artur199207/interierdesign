@@ -640,3 +640,109 @@ function activate(e) {
 }
 
 document.addEventListener('click',activate,false);
+
+
+
+function toggleDropdown() {
+    const dropdownContent = document.getElementById('dropdown-content');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', function(event) {
+    const isClickInside = document.querySelector('.language-select').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('dropdown-content').style.display = 'none';
+    }
+});
+
+document.querySelectorAll('.dropdown-option').forEach(option => {
+    option.addEventListener('click', function() {
+        const selectedLanguage = this.getAttribute('data-value');
+        document.getElementById('selected-option').textContent = this.textContent;
+        document.getElementById('dropdown-content').style.display = 'none';
+        changeLanguage(selectedLanguage);
+    });
+});
+
+function changeLanguage(selectedLanguage) {
+    const languageData = {
+        arm: {
+            aboute: "Մեր մասին",
+            settings: "Ծառայություններ",
+        },
+        rus: {
+            aboute: "О нас",
+            settings: "Услуги",
+        },
+        eng: {
+            aboute: "About us",
+            settings: "Services",
+        }
+    };
+
+    document.querySelectorAll(".aboute").forEach(element => {
+        element.textContent = languageData[selectedLanguage].aboute;
+    });
+    document.querySelectorAll(".settings").forEach(element => {
+        element.textContent = languageData[selectedLanguage].settings;
+    });
+
+    localStorage.setItem("selectedLanguage", selectedLanguage);
+
+    const dropdownItems = document.querySelectorAll(".dropdown-menu .navbar-menu a");
+    dropdownItems.forEach(item => {
+        const key = item.id;
+        if (languageData[selectedLanguage][key]) {
+            item.textContent = languageData[selectedLanguage][key];
+        }
+    });
+}
+
+function restoreLanguage() {
+    const selectedLanguage = localStorage.getItem("selectedLanguage") || 'eng';
+    document.getElementById('selected-option').textContent = document.querySelector(`.dropdown-option[data-value=${selectedLanguage}]`).textContent;
+    changeLanguage(selectedLanguage);
+}
+
+window.onload = restoreLanguage;
+
+// Image Preview Functionality
+let currentImageIndex = 0;
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        openPreview(index);
+    });
+});
+
+function openPreview(index) {
+    currentImageIndex = index;
+    const previewImage = document.getElementById('preview-image');
+    previewImage.src = galleryItems[currentImageIndex].src;
+    document.getElementById('image-preview').style.display = 'flex';
+    document.addEventListener('keydown', handleKeydown);
+}
+
+function closePreview() {
+    document.getElementById('image-preview').style.display = 'none';
+    document.removeEventListener('keydown', handleKeydown);
+}
+
+function changeImage(direction) {
+    currentImageIndex += direction;
+    if (currentImageIndex < 0) {
+        currentImageIndex = galleryItems.length - 1;
+    } else if (currentImageIndex >= galleryItems.length) {
+        currentImageIndex = 0;
+    }
+    document.getElementById('preview-image').src = galleryItems[currentImageIndex].src;
+}
+
+function handleKeydown(event) {
+    if (event.key === 'ArrowLeft') {
+        changeImage(-1);
+    } else if (event.key === 'ArrowRight') {
+        changeImage(1);
+    }
+}
