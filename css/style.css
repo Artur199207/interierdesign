@@ -1,15 +1,4 @@
-@charset "UTF-8";
-/**
- * [Table of contents]
- *   1 Base
- *   2 Plugins
- *   3 Helpers
- *   4 Plugins
- */
-/** @group Base */
-/*
-* Contexts
-*/
+
 .context-dark, .bg-gray-700, .bg-gray-900, .bg-primary,
 .context-dark h1,
 .bg-gray-700 h1,
@@ -110,10 +99,7 @@ html p a:hover {
 	text-decoration: none;
 }
 
-/** @group Plugins */
-/*
-* Typography
-*/
+
 @font-face {
 	font-family:"Mardoto-Medium" ;
 	src: url(../fonts/ttf/Mardoto-Medium.ttf);
@@ -5887,7 +5873,9 @@ html.rd-navbar-fixed-linked header {
 	border: none;
 	background-color: transparent;
 	color: #FFFFFF;
+	cursor: pointer;
 }
 .new__lenguages option{
 	background-color: black;
+	cursor: pointer;
 }
