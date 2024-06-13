@@ -344,7 +344,10 @@ a[href*='tel'], a[href*='mailto'] {
 	display: inline-flex;
 	justify-content: center;
 }
-
+.newFurniture{
+	width: 200px;
+	height: 200px;
+}
 .link-bd-btm::before {
 	content: '';
 	position: absolute;
@@ -4338,7 +4341,7 @@ html.tablet .ui-to-top {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 49px 0;
+	padding: 10pxpx 0;
 }
 
 @media (min-width: 1200px) {
@@ -4351,7 +4354,9 @@ html.tablet .ui-to-top {
 	max-width: 200px;
 	max-height: 200px;
 }
-
+.furniture{
+	display: none;
+}
 .rd-navbar.rd-navbar-static .rd-navbar-main-element {
 	display: flex;
 	align-items: center;
@@ -5423,7 +5428,11 @@ html.rd-navbar-fixed-linked header {
 	overflow: hidden;
 	/* fix for flashing background */
 }
-
+.furniture{
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+}
 .owl-carousel .owl-controls .owl-nav .owl-prev,
 .owl-carousel .owl-controls .owl-nav .owl-next,
 .owl-carousel .owl-controls .owl-dot {
